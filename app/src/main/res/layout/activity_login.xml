@@ -40,23 +40,23 @@
 
 
     <Button
+        android:id="@+id/buttonLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Entrar"
-        android:id="@+id/button_login"
         android:layout_gravity="center_horizontal"
-        android:textColor="@color/icons"
-        android:background="@color/blue_btns"
+        android:layout_marginBottom="50dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="50dp"/>
+        android:background="@color/blue_btns"
+        android:text="Entrar"
+        android:textColor="@color/icons" />
 
-    <ImageView
-        android:id="@+id/img_loginfb"
-        android:layout_width="180dp"
+
+    <com.facebook.login.widget.LoginButton
+        android:id="@+id/buttonLoginFb"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="56dp"
-        android:src="@drawable/loginfb"
-        android:layout_gravity="center"/>
+        android:layout_gravity="center"
+        android:layout_marginBottom="56dp" />
 
 
 </LinearLayout>

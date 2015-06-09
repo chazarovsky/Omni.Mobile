@@ -2,8 +2,12 @@
 <resources>
 
     <string name="app_name">Omni DF</string>
-    <string name="hello_world">Hello world!</string>
-    <string name="action_settings">Settings</string>
+    <string name="action_settings">Ajustes</string>
     <string name="title_activity_util">UtilActivity</string>
+    <string name="facebook_app_id">957965934233915</string>
+
+    <string name="welcome_user">Bienvenido %1$s</string>
+    <string name="login_cancel">Debes iniciar sesion</string>
+    <string name="login_error">Hubo un error. intentalo nuevamente</string>
 
 </resources>
