@@ -14,7 +14,7 @@ public class UtilActivity extends ActionBarActivity {
         setContentView(R.layout.activity_util);
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
-                    .add(R.id.container, new IndicationsFragment())
+                    .add(R.id.fragmentContainer, new IndicationsFragment())
                     .commit();
         }
     }
