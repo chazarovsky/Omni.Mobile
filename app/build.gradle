@@ -26,4 +26,5 @@ dependencies {
     compile 'com.android.support:design:22.2.0'
     compile 'com.facebook.android:facebook-android-sdk:4.0.0'
     compile 'com.mcxiaoke.volley:library:1.0.+'
+    compile 'com.cocoahero.android:geojson:1.0.1@jar'
 }

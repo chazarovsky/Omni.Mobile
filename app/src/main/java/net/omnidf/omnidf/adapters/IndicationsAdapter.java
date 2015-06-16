@@ -1,4 +1,4 @@
-package net.omnidf.omnidf;
+package net.omnidf.omnidf.adapters;
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -7,20 +7,29 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import net.omnidf.omnidf.pojos.Features;
+import net.omnidf.omnidf.R;
+
 import java.util.ArrayList;
 
 public class IndicationsAdapter extends RecyclerView.Adapter<IndicationsAdapter.ViewHolder>{
 
-    ArrayList<Indication> indications;
+    ArrayList<Features> indications;
 
-    public IndicationsAdapter(ArrayList<Indication> indications) {
+    public IndicationsAdapter(ArrayList<Features> indications) {
         this.indications = indications;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.item_indications, viewGroup, false);
+        View v = null;
+        if(i == 0){
+        v = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.item_indications, viewGroup, false); }
+        else if(i == 1){
+            v = LayoutInflater.from(viewGroup.getContext())
+                    .inflate(R.layout.item_indications_metro, viewGroup, false);
+        }
 
         return new ViewHolder(v);
     }
@@ -49,4 +58,5 @@ public class IndicationsAdapter extends RecyclerView.Adapter<IndicationsAdapter.
             textIndication = (TextView) itemView.findViewById(R.id.textIndication);
         }
     }
+
 }

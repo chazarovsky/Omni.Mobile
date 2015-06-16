@@ -1,9 +1,12 @@
-package net.omnidf.omnidf;
+package net.omnidf.omnidf.activities;
 
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import net.omnidf.omnidf.fragments.IndicationsFragment;
+import net.omnidf.omnidf.R;
 
 
 public class UtilActivity extends ActionBarActivity {
