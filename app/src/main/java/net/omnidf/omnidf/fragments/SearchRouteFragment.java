@@ -1,0 +1,62 @@
+package net.omnidf.omnidf.fragments;
+
+import android.app.Activity;
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+
+import net.omnidf.omnidf.R;
+
+public class SearchRouteFragment extends Fragment {
+    EditText inputDestination;
+    Button buttonGetRoute;
+
+    public SearchRouteFragment() {
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+
+        View view = inflater.inflate(R.layout.fragment_search_route, container, false);
+
+        inputDestination = (EditText) view.findViewById(R.id.inputDestination);
+        buttonGetRoute = (Button) view.findViewById(R.id.buttonGetRoute);
+
+        buttonGetRoute.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Bundle args = new Bundle();
+                args.putString("destination", inputDestination.getText().toString());
+                IndicationsFragment indicationsFragment = new IndicationsFragment();
+                indicationsFragment.setArguments(args);
+
+                getActivity().getSupportFragmentManager().beginTransaction()
+                        .replace(R.id.fragmentContainer, indicationsFragment)
+                        .commit();
+            }
+        });
+
+        return view;
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+    }
+
+}

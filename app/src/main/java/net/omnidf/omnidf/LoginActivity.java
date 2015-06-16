@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,7 +27,7 @@ import net.omnidf.omnidf.activities.UtilActivity;
 import java.util.Arrays;
 
 
-public class LoginActivity extends ActionBarActivity {
+public class LoginActivity extends AppCompatActivity {
 
     Button buttonLogin;
     LoginButton buttonLoginFb;
@@ -44,8 +45,6 @@ public class LoginActivity extends ActionBarActivity {
         FacebookSdk.sdkInitialize(appContext);
         callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_login);
-
-        getSupportActionBar().hide();
 
         if(AccessToken.getCurrentAccessToken() != null) startUtilActivity();
 

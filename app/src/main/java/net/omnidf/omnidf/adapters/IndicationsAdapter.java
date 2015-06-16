@@ -7,38 +7,33 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import net.omnidf.omnidf.pojos.Features;
+import com.cocoahero.android.geojson.Feature;
+
 import net.omnidf.omnidf.R;
 
-import java.util.ArrayList;
+import java.util.List;
 
 public class IndicationsAdapter extends RecyclerView.Adapter<IndicationsAdapter.ViewHolder>{
 
-    ArrayList<Features> indications;
+    List<Feature> indications;
 
-    public IndicationsAdapter(ArrayList<Features> indications) {
+    public IndicationsAdapter(List<Feature> indications) {
         this.indications = indications;
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = null;
-        if(i == 0){
-        v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.item_indications, viewGroup, false); }
-        else if(i == 1){
-            v = LayoutInflater.from(viewGroup.getContext())
-                    .inflate(R.layout.item_indications_metro, viewGroup, false);
-        }
+        View v = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.item_indications, viewGroup, false);
 
         return new ViewHolder(v);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-
         viewHolder.imageIndicationType.setImageResource(R.drawable.testicon);
-        viewHolder.textIndication.setText(indications.get(i).getIndication());
+        viewHolder.textIndication.setText(indications.get(i).getProperties().optString("node-name"));
+
     }
 
     @Override

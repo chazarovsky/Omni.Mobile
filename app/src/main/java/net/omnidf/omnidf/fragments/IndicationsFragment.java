@@ -1,6 +1,5 @@
 package net.omnidf.omnidf.fragments;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,31 +13,23 @@ import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonArrayRequest;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.cocoahero.android.geojson.Feature;
 import com.cocoahero.android.geojson.FeatureCollection;
 import com.cocoahero.android.geojson.GeoJSON;
-import com.cocoahero.android.geojson.GeoJSONObject;
 
 import net.omnidf.omnidf.Const;
-import net.omnidf.omnidf.pojos.Features;
 import net.omnidf.omnidf.adapters.IndicationsAdapter;
 import net.omnidf.omnidf.R;
 
-import org.json.JSONArray;
-import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
+import java.util.List;
 
 public class IndicationsFragment extends Fragment {
-
-    Context utilActivityContext = getActivity();
     RecyclerView indicationsRecyclerView;
     IndicationsAdapter indicationsAdapter;
-    ArrayList<GeoJSONObject> indications = new ArrayList<>();
+    List<Feature> indications;
     RequestQueue httpRequestQueue;
 
     public IndicationsFragment() {
@@ -47,30 +38,31 @@ public class IndicationsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.fragment_indications, container, false);
 
-        httpRequestQueue = Volley.newRequestQueue(utilActivityContext);
+        httpRequestQueue = Volley.newRequestQueue(getActivity());
 
-        indicationsRecyclerView = (RecyclerView) container.findViewById(R.id.indicationsRecyclerView);
+        indicationsRecyclerView = (RecyclerView) view.findViewById(R.id.indicationsRecyclerView);
         indicationsRecyclerView.setHasFixedSize(true);
 
-        indicationsAdapter = new IndicationsAdapter(indications);
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(utilActivityContext);
+        RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
 
         indicationsRecyclerView.setLayoutManager(linearLayoutManager);
-        indicationsRecyclerView.setAdapter(indicationsAdapter);
 
-        JsonObjectRequest indicationsJsonRequest = new JsonObjectRequest(Request.Method.GET, Const.URL_INDICATIONS,
+        JsonObjectRequest indicationsJsonRequest = new JsonObjectRequest(Request.Method.GET, getUrlRequest(),
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
                         JSONObject jsonresponse = null;
-                        try {
-                            jsonresponse = response.getJSONObject("content")
-                                    .getJSONObject("route_nodes");
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                        GeoJSONObject geoJSON = GeoJSON.parse(jsonresponse);
+                            jsonresponse = response.optJSONObject("content")
+                                    .optJSONObject("route_nodes");
+
+                        FeatureCollection geoJson = (FeatureCollection) GeoJSON.parse(jsonresponse);
+                        indications = geoJson.getFeatures();
+
+                        IndicationsAdapter indicationsAdapter = new IndicationsAdapter(indications);
+                        indicationsRecyclerView.setAdapter(indicationsAdapter);
+
 
                     }
                 }, new Response.ErrorListener() {
@@ -82,6 +74,10 @@ public class IndicationsFragment extends Fragment {
 
         httpRequestQueue.add(indicationsJsonRequest);
 
-        return inflater.inflate(R.layout.fragment_indications, container, false);
+        return view;
+    }
+
+    public String getUrlRequest(){
+        return Const.URL_INDICATIONS + getArguments().getString("destination", "Insurgentes");
     }
 }

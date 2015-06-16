@@ -10,4 +10,7 @@
     <string name="login_cancel">Debes iniciar sesion</string>
     <string name="login_error">Hubo un error. intentalo nuevamente</string>
 
+<!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 </resources>
