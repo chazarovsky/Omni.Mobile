@@ -7,7 +7,9 @@
     <ImageView
         android:id="@+id/imageIndicationType"
         android:layout_width="@dimen/image_indication_type_width"
-        android:layout_height="@dimen/image_indication_type_height" />
+        android:layout_height="@dimen/image_indication_type_height"
+        android:padding="@dimen/image_indication_type_padding"
+        android:src="@drawable/walk_icon"/>
 
     <TextView
         android:id="@+id/textIndication"

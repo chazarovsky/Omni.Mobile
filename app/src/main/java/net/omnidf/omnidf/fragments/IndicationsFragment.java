@@ -77,6 +77,12 @@ public class IndicationsFragment extends Fragment {
         return view;
     }
 
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+        httpRequestQueue.stop();
+    }
+
     public String getUrlRequest(){
         return Const.URL_INDICATIONS + getArguments().getString("destination", "Insurgentes");
     }

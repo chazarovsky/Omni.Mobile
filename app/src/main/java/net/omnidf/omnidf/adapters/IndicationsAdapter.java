@@ -23,15 +23,15 @@ public class IndicationsAdapter extends RecyclerView.Adapter<IndicationsAdapter.
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View v = LayoutInflater.from(viewGroup.getContext())
-                .inflate(R.layout.item_indications, viewGroup, false);
+        View inflatedItem;
+        inflatedItem = LayoutInflater.from(viewGroup.getContext())
+                .inflate(R.layout.item_indications_walk, viewGroup, false);
 
-        return new ViewHolder(v);
+        return new ViewHolder(inflatedItem);
     }
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        viewHolder.imageIndicationType.setImageResource(R.drawable.testicon);
         viewHolder.textIndication.setText(indications.get(i).getProperties().optString("node-name"));
 
     }
