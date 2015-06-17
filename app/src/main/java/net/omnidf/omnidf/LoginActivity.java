@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -48,8 +47,7 @@ public class LoginActivity extends AppCompatActivity {
 
         if(AccessToken.getCurrentAccessToken() != null) startUtilActivity();
 
-        buttonLoginFb = (LoginButton) findViewById(R.id.buttonLoginFb);
-        buttonLogin = (Button) findViewById(R.id.buttonLogin);
+        initViews();
 
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -58,24 +56,7 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
-        buttonLoginFb.setReadPermissions(Arrays.asList("public_profile, email"));
-        buttonLoginFb.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
-            @Override
-            public void onSuccess(LoginResult loginResult) {
-                Toast.makeText(appContext, appResources.getString(R.string.welcome_user) , Toast.LENGTH_SHORT).show();
-                startUtilActivity();
-            }
-
-            @Override
-            public void onCancel() {
-                Toast.makeText(appContext, appResources.getString(R.string.login_cancel), Toast.LENGTH_SHORT).show();
-            }
-
-            @Override
-            public void onError(FacebookException e) {
-                Toast.makeText(appContext, appResources.getString(R.string.login_error), Toast.LENGTH_SHORT).show();
-            }
-        });
+        setupFacebookLogin();
 
     }
 
@@ -127,5 +108,30 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     }
 
+    private void initViews(){
+        buttonLoginFb = (LoginButton) findViewById(R.id.buttonLoginFb);
+        buttonLogin = (Button) findViewById(R.id.buttonLogin);
+    }
+
+    private void setupFacebookLogin(){
+        buttonLoginFb.setReadPermissions(Arrays.asList("public_profile, email"));
+        buttonLoginFb.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                Toast.makeText(appContext, appResources.getString(R.string.loginfb_success) , Toast.LENGTH_SHORT).show();
+                startUtilActivity();
+            }
+
+            @Override
+            public void onCancel() {
+                Toast.makeText(appContext, appResources.getString(R.string.loginfb_cancel), Toast.LENGTH_SHORT).show();
+            }
+
+            @Override
+            public void onError(FacebookException e) {
+                Toast.makeText(appContext, appResources.getString(R.string.loginfb_error), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
 
 }

@@ -6,11 +6,8 @@
     <string name="title_activity_util">UtilActivity</string>
     <string name="facebook_app_id">957965934233915</string>
 
-    <string name="welcome_user">Bienvenido</string>
-    <string name="login_cancel">Debes iniciar sesion</string>
-    <string name="login_error">Hubo un error. intentalo nuevamente</string>
-
-<!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="loginfb_success">Bienvenido</string>
+    <string name="loginfb_cancel">Debes iniciar sesión</string>
+    <string name="loginfb_error">Hubo un error. inténtalo nuevamente</string>
 
 </resources>
