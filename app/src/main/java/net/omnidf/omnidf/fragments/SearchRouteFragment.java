@@ -37,26 +37,16 @@ public class SearchRouteFragment extends Fragment {
             public void onClick(View v) {
                 Bundle args = new Bundle();
                 args.putString("destination", inputDestination.getText().toString());
-                IndicationsFragment indicationsFragment = new IndicationsFragment();
-                indicationsFragment.setArguments(args);
+                DirectionsFragment directionsFragment = new DirectionsFragment();
+                directionsFragment.setArguments(args);
 
                 getActivity().getSupportFragmentManager().beginTransaction()
-                        .replace(R.id.fragmentContainer, indicationsFragment)
+                        .replace(R.id.fragmentContainer, directionsFragment)
                         .commit();
             }
         });
 
         return view;
-    }
-
-    @Override
-    public void onAttach(Activity activity) {
-        super.onAttach(activity);
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
     }
 
 }

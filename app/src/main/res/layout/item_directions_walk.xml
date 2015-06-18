@@ -5,14 +5,14 @@
     android:orientation="horizontal">
 
     <ImageView
-        android:id="@+id/imageIndicationType"
+        android:id="@+id/imageDirectionType"
         android:layout_width="@dimen/image_indication_type_width"
         android:layout_height="@dimen/image_indication_type_height"
         android:padding="@dimen/image_indication_type_padding"
         android:src="@drawable/walk_icon"/>
 
     <TextView
-        android:id="@+id/textIndication"
+        android:id="@+id/textDirection"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>
