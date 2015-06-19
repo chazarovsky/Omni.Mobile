@@ -27,10 +27,10 @@ public class SearchRouteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
-        View view = inflater.inflate(R.layout.fragment_search_route, container, false);
+        View fragmentSearchRouteView = inflater.inflate(R.layout.fragment_search_route, container, false);
 
-        inputDestination = (EditText) view.findViewById(R.id.inputDestination);
-        buttonGetRoute = (Button) view.findViewById(R.id.buttonGetRoute);
+        inputDestination = (EditText) fragmentSearchRouteView.findViewById(R.id.inputDestination);
+        buttonGetRoute = (Button) fragmentSearchRouteView.findViewById(R.id.buttonGetRoute);
 
         buttonGetRoute.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,7 +46,7 @@ public class SearchRouteFragment extends Fragment {
             }
         });
 
-        return view;
+        return fragmentSearchRouteView;
     }
 
 }

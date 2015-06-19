@@ -9,6 +9,7 @@
         android:layout_width="@dimen/input_destination_width"
         android:layout_height="wrap_content"
         android:layout_centerHorizontal="true"
+        android:inputType="textCapSentences"
         android:layout_centerVertical="true" />
 
     <Button

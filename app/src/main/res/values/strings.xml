@@ -10,4 +10,7 @@
     <string name="loginfb_cancel">Debes iniciar sesión</string>
     <string name="loginfb_error">Hubo un error. inténtalo nuevamente</string>
 
+    <string name="http_req_error">Hubo un error. Verifica tu conexión a Internet</string>
+    <string name="http_req_nodirections">No existen rutas</string>
+
 </resources>

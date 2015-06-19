@@ -2,7 +2,6 @@ package net.omnidf.omnidf;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -31,15 +30,12 @@ public class LoginActivity extends AppCompatActivity {
     Button buttonLogin;
     LoginButton buttonLoginFb;
     CallbackManager callbackManager;
-    Resources appResources;
     Context appContext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
-        appResources = getResources();
         appContext = getApplicationContext();
         FacebookSdk.sdkInitialize(appContext);
         callbackManager = CallbackManager.Factory.create();
@@ -118,18 +114,18 @@ public class LoginActivity extends AppCompatActivity {
         buttonLoginFb.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
-                Toast.makeText(appContext, appResources.getString(R.string.loginfb_success) , Toast.LENGTH_SHORT).show();
+                Toast.makeText(appContext, R.string.loginfb_success, Toast.LENGTH_SHORT).show();
                 startUtilActivity();
             }
 
             @Override
             public void onCancel() {
-                Toast.makeText(appContext, appResources.getString(R.string.loginfb_cancel), Toast.LENGTH_SHORT).show();
+                Toast.makeText(appContext, R.string.loginfb_cancel, Toast.LENGTH_SHORT).show();
             }
 
             @Override
             public void onError(FacebookException e) {
-                Toast.makeText(appContext, appResources.getString(R.string.loginfb_error), Toast.LENGTH_SHORT).show();
+                Toast.makeText(appContext, R.string.loginfb_error, Toast.LENGTH_SHORT).show();
             }
         });
     }
