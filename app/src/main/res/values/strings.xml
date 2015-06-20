@@ -8,9 +8,11 @@
 
     <string name="loginfb_success">Bienvenido</string>
     <string name="loginfb_cancel">Debes iniciar sesión</string>
-    <string name="loginfb_error">Hubo un error. inténtalo nuevamente</string>
+    <string name="loginfb_error">Hubo un error. Ingresa nuevamente</string>
 
     <string name="http_req_error">Hubo un error. Verifica tu conexión a Internet</string>
-    <string name="http_req_nodirections">No existen rutas</string>
+    <string name="http_req_parse_error">Error, intentalo nuevamente</string>
+    <string name="inputOrigin_hint">Origen</string>
+    <string name="inputDestination_hint">Destino</string>
 
 </resources>

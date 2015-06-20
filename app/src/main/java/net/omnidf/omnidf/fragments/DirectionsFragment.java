@@ -1,5 +1,6 @@
 package net.omnidf.omnidf.fragments;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -18,6 +19,8 @@ import net.omnidf.omnidf.rest.OmniServer;
 public class DirectionsFragment extends Fragment {
     RecyclerView directionsRecyclerView;
     RequestQueue httpRequestQueue;
+    Context utilActivity;
+    Bundle fragmentArgs;
 
     public DirectionsFragment() {
     }
@@ -26,17 +29,19 @@ public class DirectionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View directionsFragmentView = inflater.inflate(R.layout.fragment_directions, container, false);
+        utilActivity = getActivity();
+        fragmentArgs = getArguments();
 
-        httpRequestQueue = Volley.newRequestQueue(getActivity());
+        httpRequestQueue = Volley.newRequestQueue(utilActivity);
 
         directionsRecyclerView = (RecyclerView) directionsFragmentView.findViewById(R.id.directionsRecyclerView);
         directionsRecyclerView.setHasFixedSize(true);
 
-        RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(utilActivity);
         directionsRecyclerView.setLayoutManager(linearLayoutManager);
 
-        Request directionsRequest = new OmniServer.RequestBuilder(getActivity())
-                .fetchIndications("Ermita", getArguments().getString("destination")) //TODO get real user origin
+        Request directionsRequest = new OmniServer.RequestBuilder(utilActivity)
+                .fetchDirections(fragmentArgs.getString("origin"), fragmentArgs.getString("destination"))
                 .intoRecyclerView(directionsRecyclerView).build();
         httpRequestQueue.add(directionsRequest);
 

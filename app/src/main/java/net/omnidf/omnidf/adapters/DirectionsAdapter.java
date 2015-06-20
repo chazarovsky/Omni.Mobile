@@ -23,11 +23,10 @@ public class DirectionsAdapter extends RecyclerView.Adapter<DirectionsAdapter.Vi
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int i) {
-        View ItemDirectionsWalkView;
-        ItemDirectionsWalkView = LayoutInflater.from(viewGroup.getContext())
+        View walkingDirectionsStepView = LayoutInflater.from(viewGroup.getContext())
                 .inflate(R.layout.item_directions_walk, viewGroup, false);
 
-        return new ViewHolder(ItemDirectionsWalkView);
+        return new ViewHolder(walkingDirectionsStepView);
     }
 
     @Override

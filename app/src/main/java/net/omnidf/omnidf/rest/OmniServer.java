@@ -1,7 +1,7 @@
 package net.omnidf.omnidf.rest;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
+import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.widget.Toast;
@@ -23,7 +23,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class OmniServer {
-    public static final String GET_DIRECTIONS = "http://omnimobi.appspot.com/search.json?origin=%s&destination=%s";
+    public static final String SEARCH_DIRECTION_URL = "http://omnimobi.appspot.com/search.json";
 
     public static class RequestBuilder{
         private String urlRequest;
@@ -37,8 +37,8 @@ public class OmniServer {
             this.context = context;
         }
 
-        public RequestBuilder fetchIndications(String userOrigin, String userDestination ){
-            this.urlRequest = String.format(GET_DIRECTIONS, userOrigin, userDestination);
+        public RequestBuilder fetchDirections(String userOrigin, String userDestination){
+            this.urlRequest = urlDirections(userOrigin, userDestination);
             this.method = Request.Method.GET;
 
             this.listener = new Response.Listener<JSONObject>() {
@@ -50,7 +50,7 @@ public class OmniServer {
                                 .getJSONObject("route_nodes");
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        Toast.makeText(context, R.string.http_req_nodirections, Toast.LENGTH_LONG).show();
+                        Toast.makeText(context, R.string.http_req_parse_error, Toast.LENGTH_LONG).show();
                     }
                     setupRecyclerView(parseGeoJsonFeatures(jsonDoc));
                 }
@@ -80,13 +80,23 @@ public class OmniServer {
         // Helper methods
 
         private List<Feature> parseGeoJsonFeatures(JSONObject jsonObject){
+            if(jsonObject == null) return null;
             FeatureCollection geoJson = (FeatureCollection) GeoJSON.parse(jsonObject);
             return geoJson.getFeatures();
         }
 
         private void setupRecyclerView(List<Feature> directions){
+            if (directions == null) Toast.makeText(context, R.string.http_req_parse_error, Toast.LENGTH_SHORT).show();
+            else {
             DirectionsAdapter directionsAdapter = new DirectionsAdapter(directions);
-            recyclerView.setAdapter(directionsAdapter);
+            recyclerView.setAdapter(directionsAdapter);}
+        }
+        
+        private String urlDirections(String origin, String destination){
+            return Uri.parse(SEARCH_DIRECTION_URL).buildUpon()
+                    .appendQueryParameter("origin", origin)
+                    .appendQueryParameter("destination", destination)
+                    .build().toString();
         }
     }
 }

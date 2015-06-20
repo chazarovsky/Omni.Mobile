@@ -76,26 +76,6 @@ public class LoginActivity extends AppCompatActivity {
         AppEventsLogger.deactivateApp(this);
     }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-
-    }
-
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_login, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        return id == R.id.action_settings || super.onOptionsItemSelected(item);
-
-    }
-
     // Helper Methods
 
     private void startUtilActivity(){
