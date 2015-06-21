@@ -13,7 +13,7 @@ import net.omnidf.omnidf.R;
 
 import java.util.List;
 
-public class DirectionsAdapter extends RecyclerView.Adapter<DirectionsAdapter.ViewHolder>{
+public class DirectionsAdapter extends RecyclerView.Adapter<DirectionsAdapter.ViewHolder> {
 
     List<Feature> directions;
 

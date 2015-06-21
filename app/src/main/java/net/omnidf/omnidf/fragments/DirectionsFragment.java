@@ -41,7 +41,8 @@ public class DirectionsFragment extends Fragment {
         directionsRecyclerView.setLayoutManager(linearLayoutManager);
 
         Request directionsRequest = new OmniServer.RequestBuilder(utilActivity)
-                .fetchDirections(fragmentArgs.getString("origin"), fragmentArgs.getString("destination"))
+                .fetchDirections(fragmentArgs.getString(OmniServer.ORIGIN_QUERY),
+                        fragmentArgs.getString(OmniServer.DESTINATION_QUERY))
                 .intoRecyclerView(directionsRecyclerView).build();
         httpRequestQueue.add(directionsRequest);
 

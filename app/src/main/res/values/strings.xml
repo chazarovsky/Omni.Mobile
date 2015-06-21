@@ -14,5 +14,6 @@
     <string name="http_req_parse_error">Error, intentalo nuevamente</string>
     <string name="inputOrigin_hint">Origen</string>
     <string name="inputDestination_hint">Destino</string>
+    <string name="search">Buscar</string>
 
 </resources>

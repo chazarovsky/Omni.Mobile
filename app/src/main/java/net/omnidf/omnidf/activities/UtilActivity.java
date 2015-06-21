@@ -24,7 +24,6 @@ public class UtilActivity extends AppCompatActivity {
         if (savedInstanceState == null) {
             getSupportFragmentManager().beginTransaction()
                     .add(R.id.fragmentContainer, new SearchRouteFragment())
-                    .addToBackStack(null)
                     .commit();
         }
     }

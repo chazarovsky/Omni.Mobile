@@ -41,7 +41,7 @@ public class LoginActivity extends AppCompatActivity {
         callbackManager = CallbackManager.Factory.create();
         setContentView(R.layout.activity_login);
 
-        if(AccessToken.getCurrentAccessToken() != null) startUtilActivity();
+        if (AccessToken.getCurrentAccessToken() != null) startUtilActivity();
 
         initViews();
 
@@ -78,18 +78,18 @@ public class LoginActivity extends AppCompatActivity {
 
     // Helper Methods
 
-    private void startUtilActivity(){
+    private void startUtilActivity() {
         Intent intent = new Intent(getBaseContext(), UtilActivity.class);
         startActivity(intent);
         finish();
     }
 
-    private void initViews(){
+    private void initViews() {
         buttonLoginFb = (LoginButton) findViewById(R.id.buttonLoginFb);
         buttonLogin = (Button) findViewById(R.id.buttonLogin);
     }
 
-    private void setupFacebookLogin(){
+    private void setupFacebookLogin() {
         buttonLoginFb.setReadPermissions(Arrays.asList("public_profile, email"));
         buttonLoginFb.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override

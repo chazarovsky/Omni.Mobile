@@ -24,8 +24,10 @@ import java.util.List;
 
 public class OmniServer {
     public static final String SEARCH_DIRECTION_URL = "http://omnimobi.appspot.com/search.json";
+    public static final String ORIGIN_QUERY = "origin";
+    public static final String DESTINATION_QUERY = "destination";
 
-    public static class RequestBuilder{
+    public static class RequestBuilder {
         private String urlRequest;
         private RecyclerView recyclerView;
         private Context context;
@@ -37,7 +39,7 @@ public class OmniServer {
             this.context = context;
         }
 
-        public RequestBuilder fetchDirections(String userOrigin, String userDestination){
+        public RequestBuilder fetchDirections(String userOrigin, String userDestination) {
             this.urlRequest = urlDirections(userOrigin, userDestination);
             this.method = Request.Method.GET;
 
@@ -50,7 +52,9 @@ public class OmniServer {
                                 .getJSONObject("route_nodes");
                     } catch (JSONException e) {
                         e.printStackTrace();
-                        Toast.makeText(context, R.string.http_req_parse_error, Toast.LENGTH_LONG).show();
+                        Toast.makeText(context,
+                                R.string.http_req_parse_error,
+                                Toast.LENGTH_LONG).show();
                     }
                     setupRecyclerView(parseGeoJsonFeatures(jsonDoc));
                 }
@@ -60,42 +64,48 @@ public class OmniServer {
                 @Override
                 public void onErrorResponse(VolleyError error) {
                     Log.wtf("Volley Request ERROR", error.toString());
-                    Toast.makeText(context, R.string.http_req_error, Toast.LENGTH_LONG).show();
+                    Toast.makeText(context,
+                            R.string.http_req_error,
+                            Toast.LENGTH_LONG).show();
                 }
             };
 
             return this;
         }
 
-        public RequestBuilder intoRecyclerView(RecyclerView recyclerView){
+        public RequestBuilder intoRecyclerView(RecyclerView recyclerView) {
             this.recyclerView = recyclerView;
             return this;
         }
 
-        public JsonObjectRequest build(){
+        public JsonObjectRequest build() {
             return new JsonObjectRequest(method, urlRequest,
                     listener, errorListener);
         }
 
         // Helper methods
 
-        private List<Feature> parseGeoJsonFeatures(JSONObject jsonObject){
-            if(jsonObject == null) return null;
+        private List<Feature> parseGeoJsonFeatures(JSONObject jsonObject) {
+            if (jsonObject == null) return null;
             FeatureCollection geoJson = (FeatureCollection) GeoJSON.parse(jsonObject);
             return geoJson.getFeatures();
         }
 
-        private void setupRecyclerView(List<Feature> directions){
-            if (directions == null) Toast.makeText(context, R.string.http_req_parse_error, Toast.LENGTH_SHORT).show();
+        private void setupRecyclerView(List<Feature> directions) {
+            if (directions == null)
+                Toast.makeText(context,
+                        R.string.http_req_parse_error,
+                        Toast.LENGTH_SHORT).show();
             else {
-            DirectionsAdapter directionsAdapter = new DirectionsAdapter(directions);
-            recyclerView.setAdapter(directionsAdapter);}
+                DirectionsAdapter directionsAdapter = new DirectionsAdapter(directions);
+                recyclerView.setAdapter(directionsAdapter);
+            }
         }
-        
-        private String urlDirections(String origin, String destination){
+
+        private String urlDirections(String origin, String destination) {
             return Uri.parse(SEARCH_DIRECTION_URL).buildUpon()
-                    .appendQueryParameter("origin", origin)
-                    .appendQueryParameter("destination", destination)
+                    .appendQueryParameter(ORIGIN_QUERY, origin)
+                    .appendQueryParameter(DESTINATION_QUERY, destination)
                     .build().toString();
         }
     }

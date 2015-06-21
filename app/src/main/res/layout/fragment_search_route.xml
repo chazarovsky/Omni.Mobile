@@ -33,7 +33,7 @@
         android:layout_below="@+id/inputDestination"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="33dp"
-        android:text="Buscar"
-        android:enabled="false"/>
+        android:enabled="false"
+        android:text="@string/search" />
 
 </RelativeLayout>

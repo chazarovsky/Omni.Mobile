@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import net.omnidf.omnidf.R;
+import net.omnidf.omnidf.rest.OmniServer;
 
 public class SearchRouteFragment extends Fragment {
     EditText inputOrigin;
@@ -41,37 +42,38 @@ public class SearchRouteFragment extends Fragment {
 
     // Helper Methods
 
-    private void initViews(View fragmentSearchRouteView){
+    private void initViews(View fragmentSearchRouteView) {
         inputDestination = (EditText) fragmentSearchRouteView.findViewById(R.id.inputDestination);
         inputOrigin = (EditText) fragmentSearchRouteView.findViewById(R.id.inputOrigin);
         buttonGetRoute = (Button) fragmentSearchRouteView.findViewById(R.id.buttonGetRoute);
     }
 
-    private void setOriginDestinationArgs(DirectionsFragment directionsFragment){
+    private void setOriginDestinationArgs(Fragment fragment) {
         Bundle args = new Bundle();
-        args.putString("destination", inputDestination.getText().toString());
-        args.putString("origin", inputOrigin.getText().toString());
-        directionsFragment.setArguments(args);
+        args.putString(OmniServer.ORIGIN_QUERY, inputOrigin.getText().toString());
+        args.putString(OmniServer.DESTINATION_QUERY, inputDestination.getText().toString());
+        fragment.setArguments(args);
     }
 
-    private void startDirectionsFragment(DirectionsFragment directionsFragment){
+    private void startFragment(Fragment fragment) {
         getActivity().getSupportFragmentManager().beginTransaction()
-                .replace(R.id.fragmentContainer, directionsFragment)
+                .replace(R.id.fragmentContainer, fragment)
+                .addToBackStack(null)
                 .commit();
     }
 
-    private void setupGetRouteClickListener(Button buttonGetRoute){
+    private void setupGetRouteClickListener(Button buttonGetRoute) {
         buttonGetRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 DirectionsFragment directionsFragment = new DirectionsFragment();
                 setOriginDestinationArgs(directionsFragment);
-                startDirectionsFragment(directionsFragment);
+                startFragment(directionsFragment);
             }
         });
     }
 
-    private void setupEmptyFieldsWatcher(final EditText inputOrigin, final EditText inputDestination){
+    private void setupEmptyFieldsWatcher(final EditText inputOrigin, final EditText inputDestination) {
         TextWatcher textWatcher = new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
