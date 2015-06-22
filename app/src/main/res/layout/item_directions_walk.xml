@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <ImageView
+        android:id="@+id/imageDirectionType"
+        android:layout_width="@dimen/image_indication_type_width"
+        android:layout_height="@dimen/image_indication_type_height"
+        android:padding="@dimen/image_indication_type_padding"
+        android:src="@drawable/walk_icon"/>
+
+    <TextView
+        android:id="@+id/textDirection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+</LinearLayout>
