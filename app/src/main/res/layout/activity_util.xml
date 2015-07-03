@@ -17,7 +17,7 @@
         android:id="@+id/fragmentContainer"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context="net.omnidf.omnidf.activities.UtilActivity"
+        tools:context="net.omnidf.omnidf.UtilActivity"
         tools:ignore="MergeRootFrame"
         android:layout_below="@+id/toolbar" />
 </RelativeLayout>

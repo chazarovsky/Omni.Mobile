@@ -15,5 +15,9 @@
     <string name="inputOrigin_hint">Origen</string>
     <string name="inputDestination_hint">Destino</string>
     <string name="search">Buscar</string>
+    <string name="service_not_available">Servicio no disponible por el momento</string>
+    <string name="invalid_lat_long_used">Dirección incorrecta</string>
+    <string name="no_address_found">Dirección no encontrada</string>
+    <string name="address_found">Ruta encontrada</string>
 
 </resources>
