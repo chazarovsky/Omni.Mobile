@@ -10,6 +10,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.Menu;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -58,6 +59,11 @@ public class RoutesSearchActivity extends AppCompatActivity implements
         if (googleApiClient.isConnected()) {
             googleApiClient.disconnect();
         }
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
