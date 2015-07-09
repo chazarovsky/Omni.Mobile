@@ -42,7 +42,7 @@ public class OmniServer {
         }
 
         public RequestBuilder fetchDirections(Location userOrigin, Address userDestination) {
-            this.urlRequest = urlDirections(String.valueOf(userOrigin.getLatitude()),
+            this.urlRequest = buildUrlDirections(String.valueOf(userOrigin.getLatitude()),
                     String.valueOf(userOrigin.getLongitude()),
                     String.valueOf(userDestination.getLatitude()),
                     String.valueOf(userDestination.getLongitude()));
@@ -120,11 +120,13 @@ public class OmniServer {
             }
         }
 
-        private String urlDirections(String originlat, String originlng,
-                                     String destinationlat, String destinationlng) {
+        private String buildUrlDirections(String originLatitude, String originLongitude,
+                                          String destinationLatitude, String destinationLongitude) {
             return Uri.parse(SEARCH_DIRECTION_URL).buildUpon()
-                    .appendQueryParameter(ORIGIN_QUERY, originlat + "," + originlng)
-                    .appendQueryParameter(DESTINATION_QUERY, destinationlat + "," + destinationlng)
+                    .appendQueryParameter(ORIGIN_QUERY,
+                            originLatitude + "," + originLongitude)
+                    .appendQueryParameter(DESTINATION_QUERY,
+                            destinationLatitude + "," + destinationLongitude)
                     .build().toString();
         }
     }

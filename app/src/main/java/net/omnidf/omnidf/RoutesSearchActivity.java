@@ -16,20 +16,19 @@ import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
-import net.omnidf.omnidf.R;
 import net.omnidf.omnidf.fragments.DirectionsFragment;
-import net.omnidf.omnidf.fragments.SearchRouteFragment;
+import net.omnidf.omnidf.fragments.RouteSearchFragment;
 import net.omnidf.omnidf.geolocation.Constants;
 import net.omnidf.omnidf.geolocation.FetchLocationIntentService;
 import net.omnidf.omnidf.rest.OmniServer;
 
 
-public class UtilActivity extends AppCompatActivity implements
-        SearchRouteFragment.searchRouteListeners,
+public class RoutesSearchActivity extends AppCompatActivity implements
+        RouteSearchFragment.RouteSearchListeners,
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener {
 
-    protected static final String TAG = "main-activity";
+    protected static final String TAG = "routes-search-activity";
     protected GoogleApiClient googleApiClient;
     protected Location lastLocation;
 
@@ -38,14 +37,10 @@ public class UtilActivity extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_util);
 
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        if (toolbar != null) {
-            toolbar.setTitle(R.string.app_name);
-            setSupportActionBar(toolbar);
-        }
+        setUpToolbar();
 
         if (savedInstanceState == null) {
-            startFragment(new SearchRouteFragment(), false);
+            startFragment(new RouteSearchFragment(), false);
         }
 
         buildGoogleApiClient();
@@ -67,7 +62,7 @@ public class UtilActivity extends AppCompatActivity implements
 
     @Override
     public void onGetRoute(Location userOrigin, Address userDestination) {
-
+        // ToDo: implement method when field in case of the user doesn't have gps is integrated
     }
 
     @Override
@@ -81,11 +76,11 @@ public class UtilActivity extends AppCompatActivity implements
     }
 
     @Override
-    public void startFetchLocationService(SearchRouteFragment.GeocodedResultReciver geocodedResultReceiver,
-                                          String adressData) {
+    public void startFetchLocationService(RouteSearchFragment.GeocodedResultReceiver geocodedResultReceiver,
+                                          String addressData) {
         Intent intent = new Intent(this, FetchLocationIntentService.class);
         intent.putExtra(Constants.RECEIVER, geocodedResultReceiver);
-        intent.putExtra(Constants.ADDRESS_DATA_EXTRA, adressData);
+        intent.putExtra(Constants.ADDRESS_DATA_EXTRA, addressData);
         startService(intent);
     }
 
@@ -101,33 +96,35 @@ public class UtilActivity extends AppCompatActivity implements
 
     @Override
     public void onConnected(Bundle bundle) {
-
-        lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
-
-        if (lastLocation != null) {
-            if (!Geocoder.isPresent()) {
-                showToast(R.string.service_not_available);
-            }
-        }
+        tryToEnsureOriginCanBeObtained();
     }
 
     @Override
     public void onConnectionSuspended(int i) {
-        Log.i(TAG, "Connection suspended");
+        showToast(R.string.connection_suspended);
         googleApiClient.connect();
     }
 
     @Override
     public void onConnectionFailed(ConnectionResult result) {
         Log.i(TAG, "Connection failed: ConnectionResult.getErrorCode() = " + result.getErrorCode());
+        showToast(R.string.service_not_available);
     }
 
     // Helper Methods
 
-    private void startFragment(Fragment fragment, boolean addToBackStack) {
+    private void setUpToolbar() {
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        if (toolbar != null) {
+            toolbar.setTitle(R.string.app_name);
+            setSupportActionBar(toolbar);
+        }
+    }
+
+    private void startFragment(Fragment fragment, boolean isAddedToBackStack) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentContainer, fragment);
-        if (addToBackStack)
+        if (isAddedToBackStack)
             transaction.addToBackStack(null);
         transaction.commit();
     }
@@ -138,5 +135,18 @@ public class UtilActivity extends AppCompatActivity implements
                 .addOnConnectionFailedListener(this)
                 .addApi(LocationServices.API)
                 .build();
+    }
+
+    private void tryToEnsureOriginCanBeObtained() {
+        lastLocation = LocationServices.FusedLocationApi.getLastLocation(googleApiClient);
+
+        if (lastLocation == null) {
+            if (!Geocoder.isPresent()) {
+                showToast(R.string.service_not_available);
+                return;
+            }
+
+            // ToDo: myOriginEditText.setVisibility(View.VISIBLE);
+        }
     }
 }

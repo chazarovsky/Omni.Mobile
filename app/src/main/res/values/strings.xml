@@ -19,5 +19,6 @@
     <string name="invalid_lat_long_used">Dirección incorrecta</string>
     <string name="no_address_found">Dirección no encontrada</string>
     <string name="address_found">Ruta encontrada</string>
+    <string name="connection_suspended">Conexión suspendida, reconectando...</string>
 
 </resources>

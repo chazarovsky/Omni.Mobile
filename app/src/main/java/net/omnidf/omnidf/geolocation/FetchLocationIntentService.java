@@ -24,7 +24,7 @@ public class FetchLocationIntentService extends IntentService {
     @Override
     protected void onHandleIntent(Intent intent) {
         String errorMessage = "";
-        locationReceiver = intent.getParcelableExtra(Constants.RECEIVER);
+        this.locationReceiver = intent.getParcelableExtra(Constants.RECEIVER);
         String address = intent.getStringExtra(Constants.ADDRESS_DATA_EXTRA);
 
         Geocoder geocoder = new Geocoder(this);
@@ -33,10 +33,10 @@ public class FetchLocationIntentService extends IntentService {
 
         try {
             addresses = geocoder.getFromLocationName(address, 1,
-                    Constants.lowerLeftLat,
-                    Constants.lowerLeftLng,
-                    Constants.upperRightLat,
-                    Constants.upperRightLng);
+                    Constants.SEARCH_LIMIT_LOWER_LEFT_LATITUDE,
+                    Constants.SEARCH_LIMIT_LOWER_LEFT_LONGITUDE,
+                    Constants.SEARCH_LIMIT_UPPER_RIGHT_LATITUDE,
+                    Constants.SEARCH_LIMIT_UPPER_RIGHT_LONGITUDE);
 
         } catch (IOException ioException) {
             errorMessage = getString(R.string.service_not_available);
@@ -44,7 +44,7 @@ public class FetchLocationIntentService extends IntentService {
         } catch (IllegalArgumentException illegalArgumentException) {
             errorMessage = getString(R.string.invalid_lat_long_used);
             Log.e(TAG, errorMessage + ". " +
-                    "Adrress = " + address);
+                    "Address = " + address);
         }
 
         if (addresses == null || addresses.size() == 0) {

@@ -18,20 +18,20 @@ import android.widget.EditText;
 import net.omnidf.omnidf.R;
 import net.omnidf.omnidf.geolocation.Constants;
 
-public class SearchRouteFragment extends Fragment {
-    private GeocodedResultReciver geocodedResultReceiver;
+public class RouteSearchFragment extends Fragment {
+    private GeocodedResultReceiver geocodedResultReceiver;
     EditText inputOrigin;
     EditText inputDestination;
     Button buttonGetRoute;
-    protected searchRouteListeners searchRouteCallback;
+    protected RouteSearchListeners routeSearchCallback;
 
-    public SearchRouteFragment() {
+    public RouteSearchFragment() {
     }
 
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        searchRouteCallback = (searchRouteListeners) activity;
+        routeSearchCallback = (RouteSearchListeners) activity;
     }
 
     @Override
@@ -43,9 +43,9 @@ public class SearchRouteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View fragmentSearchRouteView = inflater.
-                inflate(R.layout.fragment_search_route, container, false);
+                inflate(R.layout.fragment_route_search, container, false);
 
-        geocodedResultReceiver = new GeocodedResultReciver(new Handler());
+        geocodedResultReceiver = new GeocodedResultReceiver(new Handler());
 
         initViews(fragmentSearchRouteView);
         setupEmptyFieldsWatcher();
@@ -53,7 +53,7 @@ public class SearchRouteFragment extends Fragment {
         buttonGetRoute.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                searchRouteCallback.startFetchLocationService(geocodedResultReceiver,
+                routeSearchCallback.startFetchLocationService(geocodedResultReceiver,
                         inputDestination.getText().toString());
             }
         });
@@ -63,12 +63,13 @@ public class SearchRouteFragment extends Fragment {
 
     // Helper Methods
 
-    public interface searchRouteListeners {
+    public interface RouteSearchListeners {
         void onGetRoute(Location userOrigin, Address userDestination);
 
         void onGetRoute(Address userDestination);
 
-        void startFetchLocationService(GeocodedResultReciver geocodedResultReceiver, String adressData);
+        void startFetchLocationService(GeocodedResultReceiver geocodedResultReceiver,
+                                       String addressData);
 
         void showToast(String text);
 
@@ -88,6 +89,7 @@ public class SearchRouteFragment extends Fragment {
                 boolean isFill = inputOrigin.getText().toString().length() > 3
                         && inputDestination.getText().toString().length() > 3;
                 buttonGetRoute.setEnabled(isFill);
+                buttonGetRoute.setVisibility(View.VISIBLE);
             }
 
             @Override
@@ -104,8 +106,8 @@ public class SearchRouteFragment extends Fragment {
         inputDestination.addTextChangedListener(textWatcher);
     }
 
-    public class GeocodedResultReciver extends ResultReceiver {
-        public GeocodedResultReciver(Handler handler) {
+    public class GeocodedResultReceiver extends ResultReceiver {
+        public GeocodedResultReceiver(Handler handler) {
             super(handler);
         }
 
@@ -113,10 +115,10 @@ public class SearchRouteFragment extends Fragment {
         protected void onReceiveResult(int resultCode, Bundle resultData) {
             if (resultCode == Constants.FAILURE_RESULT) {
                 String result = resultData.getString(Constants.RESULT_DATA_KEY);
-                searchRouteCallback.showToast(result);
+                routeSearchCallback.showToast(result);
             } else {
                 Address result = resultData.getParcelable(Constants.RESULT_DATA_KEY);
-                searchRouteCallback.onGetRoute(result);
+                routeSearchCallback.onGetRoute(result);
             }
         }
     }
