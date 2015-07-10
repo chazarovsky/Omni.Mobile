@@ -121,10 +121,10 @@ public class RoutesSearchActivity extends AppCompatActivity implements
         }
     }
 
-    private void startFragment(Fragment fragment, boolean isAddedToBackStack) {
+    private void startFragment(Fragment fragment, boolean shouldAddToBackStack) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.fragmentContainer, fragment);
-        if (isAddedToBackStack)
+        if (shouldAddToBackStack)
             transaction.addToBackStack(null);
         transaction.commit();
     }
