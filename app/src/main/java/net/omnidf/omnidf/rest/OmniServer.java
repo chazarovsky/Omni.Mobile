@@ -1,6 +1,8 @@
 package net.omnidf.omnidf.rest;
 
 import android.content.Context;
+import android.location.Address;
+import android.location.Location;
 import android.net.Uri;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -23,7 +25,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class OmniServer {
-    public static final String SEARCH_DIRECTION_URL = "http://omnimobi.appspot.com/search.json";
+    public static final String SEARCH_DIRECTION_URL = "http://192.168.15.22:3000/home/index";
     public static final String ORIGIN_QUERY = "origin";
     public static final String DESTINATION_QUERY = "destination";
 
@@ -39,8 +41,11 @@ public class OmniServer {
             this.context = context;
         }
 
-        public RequestBuilder fetchDirections(String userOrigin, String userDestination) {
-            this.urlRequest = urlDirections(userOrigin, userDestination);
+        public RequestBuilder fetchDirections(Location userOrigin, Address userDestination) {
+            this.urlRequest = buildUrlDirections(String.valueOf(userOrigin.getLatitude()),
+                    String.valueOf(userOrigin.getLongitude()),
+                    String.valueOf(userDestination.getLatitude()),
+                    String.valueOf(userDestination.getLongitude()));
             this.method = Request.Method.GET;
 
             this.listener = new Response.Listener<JSONObject>() {
@@ -73,6 +78,12 @@ public class OmniServer {
             return this;
         }
 
+        public RequestBuilder fetchDirections(Address userOrigin, Address userDestination) {
+            Location userOriginLocation = AddressToLocation(userOrigin);
+            fetchDirections(userOriginLocation, userDestination);
+            return this;
+        }
+
         public RequestBuilder intoRecyclerView(RecyclerView recyclerView) {
             this.recyclerView = recyclerView;
             return this;
@@ -84,6 +95,13 @@ public class OmniServer {
         }
 
         // Helper methods
+
+        private Location AddressToLocation(Address address) {
+            Location location = new Location("Omni");
+            location.setLatitude(address.getLatitude());
+            location.setLongitude(address.getLongitude());
+            return location;
+        }
 
         private List<Feature> parseGeoJsonFeatures(JSONObject jsonObject) {
             if (jsonObject == null) return null;
@@ -102,10 +120,13 @@ public class OmniServer {
             }
         }
 
-        private String urlDirections(String origin, String destination) {
+        private String buildUrlDirections(String originLatitude, String originLongitude,
+                                          String destinationLatitude, String destinationLongitude) {
             return Uri.parse(SEARCH_DIRECTION_URL).buildUpon()
-                    .appendQueryParameter(ORIGIN_QUERY, origin)
-                    .appendQueryParameter(DESTINATION_QUERY, destination)
+                    .appendQueryParameter(ORIGIN_QUERY,
+                            originLatitude + "," + originLongitude)
+                    .appendQueryParameter(DESTINATION_QUERY,
+                            destinationLatitude + "," + destinationLongitude)
                     .build().toString();
         }
     }

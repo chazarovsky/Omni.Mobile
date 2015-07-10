@@ -3,16 +3,6 @@
     android:layout_height="match_parent"
     android:background="@drawable/land">
 
-
-    <EditText
-        android:id="@+id/inputDestination"
-        android:layout_width="@dimen/input_destination_width"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:hint="@string/inputOrigin_hint"
-        android:inputType="textCapSentences" />
-
     <EditText
         android:id="@+id/inputOrigin"
         android:layout_width="wrap_content"
@@ -23,8 +13,18 @@
         android:layout_alignRight="@+id/inputDestination"
         android:layout_alignStart="@+id/inputDestination"
         android:layout_marginBottom="58dp"
+        android:hint="@string/inputOrigin_hint"
+        android:inputType="textCapSentences" />
+
+    <EditText
+        android:id="@+id/inputDestination"
+        android:layout_width="@dimen/input_destination_width"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
         android:hint="@string/inputDestination_hint"
         android:inputType="textCapSentences" />
+
 
     <Button
         android:id="@+id/buttonGetRoute"
