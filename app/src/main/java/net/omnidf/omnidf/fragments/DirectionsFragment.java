@@ -13,19 +13,24 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.toolbox.Volley;
 
 import net.omnidf.omnidf.R;
 import net.omnidf.omnidf.rest.OmniServer;
 
 public class DirectionsFragment extends Fragment {
+    HttpQueueListener httpQueueCallback;
     RecyclerView directionsRecyclerView;
-    RequestQueue httpRequestQueue;
-    Context utilActivity;
+    Context RoutesSearchActivity;
     Bundle fragmentArgs;
-    Location userOrigin;
-    Address userDestination;
+    //temporal DEMO-MODE
+    //Location userOrigin;
+    //Address userDestination;
+    String userOrigin;
+    String userDestination;
+
+    public interface HttpQueueListener {
+        void addToQueue(Request request);
+    }
 
     public DirectionsFragment() {
     }
@@ -33,8 +38,11 @@ public class DirectionsFragment extends Fragment {
     @Override
     public void onAttach(Activity activity) {
         super.onAttach(activity);
-        utilActivity = activity;
-        getLocationsArgs();
+        RoutesSearchActivity = activity;
+        httpQueueCallback = (HttpQueueListener) activity;
+        //temporal DEMO-MODE
+        //getLocationsArgs();
+        getStringArgs();
     }
 
     @Override
@@ -42,12 +50,11 @@ public class DirectionsFragment extends Fragment {
                              Bundle savedInstanceState) {
         View directionsFragmentView = inflater.inflate(R.layout.fragment_directions, container, false);
 
-        httpRequestQueue = Volley.newRequestQueue(utilActivity);
         setupRecyclerView(directionsFragmentView);
-        Request directionsRequest = new OmniServer.RequestBuilder(utilActivity)
+        Request directionsRequest = new OmniServer.RequestBuilder(RoutesSearchActivity)
                 .fetchDirections(userOrigin, userDestination)
                 .intoRecyclerView(directionsRecyclerView).build();
-        httpRequestQueue.add(directionsRequest);
+        httpQueueCallback.addToQueue(directionsRequest);
 
         return directionsFragmentView;
     }
@@ -55,14 +62,14 @@ public class DirectionsFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        httpRequestQueue.stop();
     }
+
 
     //Helper Methods
     private void setupRecyclerView(View fragmentView) {
         directionsRecyclerView = (RecyclerView) fragmentView.findViewById(R.id.directionsRecyclerView);
         directionsRecyclerView.setHasFixedSize(true);
-        RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(utilActivity);
+        RecyclerView.LayoutManager linearLayoutManager = new LinearLayoutManager(RoutesSearchActivity);
         directionsRecyclerView.setLayoutManager(linearLayoutManager);
     }
 
@@ -70,6 +77,13 @@ public class DirectionsFragment extends Fragment {
         fragmentArgs = getArguments();
         userOrigin = fragmentArgs.getParcelable(OmniServer.ORIGIN_QUERY);
         userDestination = fragmentArgs.getParcelable(OmniServer.DESTINATION_QUERY);
+    }
+
+    //temporal DEMO-MODE
+    private void getStringArgs() {
+        fragmentArgs = getArguments();
+        userOrigin = fragmentArgs.getString(OmniServer.ORIGIN_QUERY);
+        userDestination = fragmentArgs.getString(OmniServer.DESTINATION_QUERY);
     }
 
 }

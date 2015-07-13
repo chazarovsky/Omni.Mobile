@@ -1,8 +1,7 @@
-package net.omnidf.omnidf.fragments;
+/*package net.omnidf.omnidf.fragments;
 
 import android.app.Activity;
 import android.location.Address;
-import android.location.Location;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.ResultReceiver;
@@ -63,23 +62,10 @@ public class RouteSearchFragment extends Fragment {
 
     // Helper Methods
 
-    public interface RouteSearchListeners {
-        void onGetRoute(Location userOrigin, Address userDestination);
-
-        void onGetRoute(Address userDestination);
-
-        void startFetchLocationService(GeocodedResultReceiver geocodedResultReceiver,
-                                       String addressData);
-
-        void showToast(String text);
-
-        void showToast(int stringResourceId);
-    }
-
     private void initViews(View fragmentSearchRouteView) {
         inputDestination = (EditText) fragmentSearchRouteView.findViewById(R.id.inputDestination);
         inputOrigin = (EditText) fragmentSearchRouteView.findViewById(R.id.inputOrigin);
-        buttonGetRoute = (Button) fragmentSearchRouteView.findViewById(R.id.buttonGetRoute);
+        buttonGetRoute = (Button) fragmentSearchRouteView.findViewById(R.id.fabGetRoute);
     }
 
     private void setupEmptyFieldsWatcher() {
@@ -122,4 +108,4 @@ public class RouteSearchFragment extends Fragment {
             }
         }
     }
-}
+} */

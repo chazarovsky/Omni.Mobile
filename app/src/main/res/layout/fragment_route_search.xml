@@ -1,7 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@drawable/land">
+    android:layout_height="match_parent">
 
     <EditText
         android:id="@+id/inputOrigin"
@@ -27,7 +26,7 @@
 
 
     <Button
-        android:id="@+id/buttonGetRoute"
+        android:id="@+id/fabGetRoute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/inputDestination"

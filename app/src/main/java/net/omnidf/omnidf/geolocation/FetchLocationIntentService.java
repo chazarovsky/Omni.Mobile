@@ -14,7 +14,7 @@ import java.io.IOException;
 import java.util.List;
 
 public class FetchLocationIntentService extends IntentService {
-    private static final String TAG = "fetch-location-intent-service";
+    private static final String TAG = "location-service";
     protected ResultReceiver locationReceiver;
 
     public FetchLocationIntentService() {

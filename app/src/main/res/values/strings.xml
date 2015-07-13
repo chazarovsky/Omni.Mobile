@@ -2,13 +2,6 @@
 <resources>
 
     <string name="app_name">Omni DF</string>
-    <string name="action_settings">Ajustes</string>
-    <string name="title_activity_util">UtilActivity</string>
-    <string name="facebook_app_id">957965934233915</string>
-
-    <string name="loginfb_success">Bienvenido</string>
-    <string name="loginfb_cancel">Debes iniciar sesión</string>
-    <string name="loginfb_error">Hubo un error. Ingresa nuevamente</string>
 
     <string name="http_req_error">Hubo un error. Verifica tu conexión a Internet</string>
     <string name="http_req_parse_error">Error, intentalo nuevamente</string>
@@ -20,5 +13,9 @@
     <string name="no_address_found">Dirección no encontrada</string>
     <string name="address_found">Ruta encontrada</string>
     <string name="connection_suspended">Conexión suspendida, reconectando...</string>
+    <string name="title_activity_home_screen">HomeScreenActivity</string>
+
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
 
 </resources>

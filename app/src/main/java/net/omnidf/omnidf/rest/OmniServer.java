@@ -25,7 +25,7 @@ import org.json.JSONObject;
 import java.util.List;
 
 public class OmniServer {
-    public static final String SEARCH_DIRECTION_URL = "http://192.168.15.22:3000/home/index";
+    public static final String SEARCH_DIRECTION_URL = "http://omnimobi.appspot.com/search.json";
     public static final String ORIGIN_QUERY = "origin";
     public static final String DESTINATION_QUERY = "destination";
 
@@ -46,6 +46,41 @@ public class OmniServer {
                     String.valueOf(userOrigin.getLongitude()),
                     String.valueOf(userDestination.getLatitude()),
                     String.valueOf(userDestination.getLongitude()));
+            this.method = Request.Method.GET;
+
+            this.listener = new Response.Listener<JSONObject>() {
+                @Override
+                public void onResponse(JSONObject response) {
+                    JSONObject jsonDoc = null;
+                    try {
+                        jsonDoc = response.getJSONObject("content")
+                                .getJSONObject("route_nodes");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                        Toast.makeText(context,
+                                R.string.http_req_parse_error,
+                                Toast.LENGTH_LONG).show();
+                    }
+                    setupRecyclerView(parseGeoJsonFeatures(jsonDoc));
+                }
+            };
+
+            this.errorListener = new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Log.wtf("Volley Request ERROR", error.toString());
+                    Toast.makeText(context,
+                            R.string.http_req_error,
+                            Toast.LENGTH_LONG).show();
+                }
+            };
+
+            return this;
+        }
+
+        //temporal DEMO-MODE
+        public RequestBuilder fetchDirections(String userOrigin, String userDestination) {
+            this.urlRequest = buildUrlDirections(userOrigin, userDestination);
             this.method = Request.Method.GET;
 
             this.listener = new Response.Listener<JSONObject>() {
@@ -127,6 +162,14 @@ public class OmniServer {
                             originLatitude + "," + originLongitude)
                     .appendQueryParameter(DESTINATION_QUERY,
                             destinationLatitude + "," + destinationLongitude)
+                    .build().toString();
+        }
+
+        //temporal DEMO-MODE
+        private String buildUrlDirections(String userOrigin, String userDestination) {
+            return Uri.parse(SEARCH_DIRECTION_URL).buildUpon()
+                    .appendQueryParameter(ORIGIN_QUERY, userOrigin)
+                    .appendQueryParameter(DESTINATION_QUERY, userDestination)
                     .build().toString();
         }
     }
