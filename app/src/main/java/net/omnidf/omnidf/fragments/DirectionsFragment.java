@@ -2,8 +2,6 @@ package net.omnidf.omnidf.fragments;
 
 import android.app.Activity;
 import android.content.Context;
-import android.location.Address;
-import android.location.Location;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -29,7 +27,7 @@ public class DirectionsFragment extends Fragment {
     String userDestination;
 
     public interface HttpQueueListener {
-        void addToQueue(Request request);
+        void addToHttpQueue(Request request);
     }
 
     public DirectionsFragment() {
@@ -54,7 +52,7 @@ public class DirectionsFragment extends Fragment {
         Request directionsRequest = new OmniServer.RequestBuilder(RoutesSearchActivity)
                 .fetchDirections(userOrigin, userDestination)
                 .intoRecyclerView(directionsRecyclerView).build();
-        httpQueueCallback.addToQueue(directionsRequest);
+        httpQueueCallback.addToHttpQueue(directionsRequest);
 
         return directionsFragmentView;
     }

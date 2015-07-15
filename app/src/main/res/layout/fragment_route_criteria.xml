@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeCheap"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/roundimg"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
+            android:text="55"
+            android:textColor="@color/icons"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageView"
+            android:layout_toEndOf="@+id/imageView"
+            android:layout_toRightOf="@+id/imageView"
+            android:text="Más Barata"
+            android:textColor="@color/primary_text"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView3"
+            android:layout_centerVertical="true"
+            android:layout_alignLeft="@+id/textView1"
+            android:layout_alignStart="@+id/textView1" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/relativeFast"
+        android:clickable="true">
+
+        <TextView
+            android:id="@+id/imageView2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/roundimg"
+            android:paddingLeft="15dp"
+            android:paddingTop="15dp"
+            android:text="32"
+            android:textAlignment="center"
+            android:textColor="@color/icons"
+            android:textSize="20sp" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignTop="@+id/imageView2"
+            android:layout_toEndOf="@+id/imageView2"
+            android:layout_toRightOf="@+id/imageView2"
+            android:text="Más Rápida"
+            android:textColor="@color/primary_text"
+            android:textSize="18sp" />
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/imageView4"/>
+    </RelativeLayout>
+
+</LinearLayout>

@@ -1,39 +1,54 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="net.omnidf.omnidf.HomeScreenActivity"
-    android:background="@drawable/landcomp">
+    android:background="@drawable/landcomp"
+    tools:context="net.omnidf.omnidf.HomeScreenActivity">
 
-    <EditText
-        android:layout_width="wrap_content"
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/inputOriginLayout"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:id="@+id/inputOrigin"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_marginTop="231dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:inputType="textCapWords" />
+        android:layout_marginEnd="31dp"
+        android:layout_marginRight="31dp"
+        android:layout_marginTop="229dp">
 
-    <EditText
-        android:layout_width="wrap_content"
+        <EditText
+            android:id="@+id/inputDestination"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/inputDestination_hint"
+            android:inputType="textCapWords"
+            android:textColor="@color/primary_text" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/inputDestinationLayout"
+        android:layout_width="130dp"
         android:layout_height="wrap_content"
-        android:id="@+id/inputDestination"
-        android:layout_below="@+id/inputOrigin"
-        android:layout_marginTop="33dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:inputType="textCapWords" />
+        android:layout_alignTop="@+id/inputOriginLayout"
+        android:layout_marginLeft="31dp">
+
+        <EditText
+            android:id="@+id/inputOrigin"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/inputOrigin_hint"
+            android:inputType="textCapWords" />
+    </android.support.design.widget.TextInputLayout>
 
     <Button
+        android:id="@+id/buttonGetRoute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/buttonGetRoute"
-        android:layout_below="@+id/inputDestination"
+        android:layout_below="@+id/inputDestinationLayout"
         android:layout_centerHorizontal="true"
         android:layout_marginTop="43dp"
+        android:background="@color/accent"
         android:text="@string/search" />
 </RelativeLayout>

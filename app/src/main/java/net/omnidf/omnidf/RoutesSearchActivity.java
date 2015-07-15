@@ -25,6 +25,7 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.location.LocationServices;
 
 import net.omnidf.omnidf.fragments.DirectionsFragment;
+import net.omnidf.omnidf.fragments.RouteCriteriaFragment;
 import net.omnidf.omnidf.geolocation.Constants;
 import net.omnidf.omnidf.geolocation.FetchLocationIntentService;
 import net.omnidf.omnidf.rest.OmniServer;
@@ -33,7 +34,8 @@ import net.omnidf.omnidf.rest.OmniServer;
 public class RoutesSearchActivity extends AppCompatActivity implements
         GoogleApiClient.ConnectionCallbacks,
         GoogleApiClient.OnConnectionFailedListener,
-        DirectionsFragment.HttpQueueListener {
+        DirectionsFragment.HttpQueueListener,
+        RouteCriteriaFragment.GetRoutesListener {
 
     private GeocodedResultReceiver geocodedResultReceiver;
 
@@ -123,8 +125,7 @@ public class RoutesSearchActivity extends AppCompatActivity implements
                 // Temporal DEMO-MODE
                 // startFetchLocationService(geocodedResultReceiver,
                 //inputDestination.getText().toString());
-                onGetRoute(inputOrigin.getText().toString(),
-                        inputDestination.getText().toString());
+                startFragment(new RouteCriteriaFragment(), false);
             }
         });
     }
@@ -142,12 +143,13 @@ public class RoutesSearchActivity extends AppCompatActivity implements
         String destination = homeScreenActivityIntent.getStringExtra(OmniServer.DESTINATION_QUERY);
         inputOrigin.setText(origin);
         inputDestination.setText(destination);
-        onGetRoute(origin, destination);
+        startFragment(new RouteCriteriaFragment(), false);
     }
 
     private void startFragment(Fragment fragment, boolean shouldAddToBackStack) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragmentContainer, fragment);
+        transaction.setCustomAnimations(R.anim.slide_in_right, R.anim.slide_out_left)
+                .replace(R.id.fragmentContainer, fragment);
         if (shouldAddToBackStack)
             transaction.addToBackStack(null);
         transaction.commit();
@@ -188,7 +190,7 @@ public class RoutesSearchActivity extends AppCompatActivity implements
         args.putParcelable(OmniServer.ORIGIN_QUERY, lastLocation);
         args.putParcelable(OmniServer.DESTINATION_QUERY, userDestination);
         directionsFragment.setArguments(args);
-        startFragment(directionsFragment, false);
+        startFragment(directionsFragment, true);
     }
 
     private void onGetRoute(String userOrigin, String userDestination) {
@@ -197,13 +199,19 @@ public class RoutesSearchActivity extends AppCompatActivity implements
         args.putString(OmniServer.ORIGIN_QUERY, userOrigin);
         args.putString(OmniServer.DESTINATION_QUERY, userDestination);
         directionsFragment.setArguments(args);
-        startFragment(directionsFragment, false);
+        startFragment(directionsFragment, true);
     }
 
 
     @Override
-    public void addToQueue(Request request) {
+    public void addToHttpQueue(Request request) {
         httpRequestQueue.add(request);
+    }
+
+    @Override
+    public void onGetRoute() {
+        onGetRoute(inputOrigin.getText().toString(),
+                inputDestination.getText().toString());
     }
 
     public class GeocodedResultReceiver extends ResultReceiver {

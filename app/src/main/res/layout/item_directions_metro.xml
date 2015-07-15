@@ -9,7 +9,7 @@
         android:layout_width="@dimen/image_indication_type_width"
         android:layout_height="@dimen/image_indication_type_height"
         android:padding="@dimen/image_indication_type_padding"
-        android:src="@drawable/metro_icon"/>
+        android:src="@drawable/ic_metroround"/>
 
     <LinearLayout
         android:id="@+id/transbordsLinear"
