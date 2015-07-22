@@ -1,4 +1,4 @@
-package net.omnidf.omnidf.fragments;
+/* package net.omnidf.omnidf.fragments;
 
 import android.app.Activity;
 import android.content.Context;
@@ -62,7 +62,6 @@ public class DirectionsFragment extends Fragment {
         super.onDestroyView();
     }
 
-
     //Helper Methods
     private void setupRecyclerView(View fragmentView) {
         directionsRecyclerView = (RecyclerView) fragmentView.findViewById(R.id.directionsRecyclerView);
@@ -84,4 +83,4 @@ public class DirectionsFragment extends Fragment {
         userDestination = fragmentArgs.getString(OmniServer.DESTINATION_QUERY);
     }
 
-}
+} */

@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/time1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/time_circle"
+            android:gravity="center"
+            android:text="2 \nmin" />
+
+        <ImageView
+            android:id="@+id/img_bike"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@id/time1"
+            android:layout_toRightOf="@id/time1"
+            android:src="@drawable/ic_bike"
+            android:tint="@color/primary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/img_bike"
+            android:layout_toRightOf="@id/img_bike"
+            android:text="Dirección Metro Insurgentes"
+            android:textColor="@color/primary_text" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/time2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/time_circle"
+            android:gravity="center"
+            android:text="20 \nmin" />
+
+        <ImageView
+            android:id="@+id/img_metro"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@id/time2"
+            android:layout_toRightOf="@id/time2"
+            android:src="@drawable/ic_metro"
+            android:tint="#F7A12F" />
+
+        <TextView
+            android:id="@+id/img_metro_linea"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@id/img_metro"
+            android:layout_toRightOf="@id/img_metro"
+            android:background="@drawable/metro_circle"
+            android:backgroundTint="#DD66DA"
+            android:gravity="center"
+            android:text="L1"
+            android:textColor="@color/icons" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/img_metro_linea"
+            android:layout_toRightOf="@id/img_metro_linea"
+            android:text="Insurgentes > Pantitlan"
+            android:textColor="@color/primary" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:layout_centerVertical="true"
+            android:id="@+id/time3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/time_circle"
+            android:gravity="center"
+            android:text="15 \nmin" />
+
+        <ImageView
+            android:id="@+id/img_taxi"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="10dp"
+            android:layout_toEndOf="@id/time3"
+            android:layout_toRightOf="@id/time3"
+            android:src="@drawable/ic_taxi"
+            android:tint="@color/primary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_toEndOf="@id/img_taxi"
+            android:layout_toRightOf="@id/img_taxi"
+            android:text="Toma un Taxi hacia tu destino"
+            android:textColor="@color/primary_text" />
+    </RelativeLayout>
+
+</LinearLayout>

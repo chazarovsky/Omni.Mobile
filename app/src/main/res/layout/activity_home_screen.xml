@@ -2,53 +2,62 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/landcomp"
+    android:background="@drawable/bg_blur"
     tools:context="net.omnidf.omnidf.HomeScreenActivity">
 
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/inputOriginLayout"
-        android:layout_width="130dp"
+    <ImageView
+        android:id="@+id/imageOmni"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginEnd="31dp"
-        android:layout_marginRight="31dp"
-        android:layout_marginTop="229dp">
+        android:src="@drawable/ic_logo_01"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp" />
 
-        <EditText
-            android:id="@+id/inputDestination"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/inputDestination_hint"
-            android:inputType="textCapWords"
-            android:textColor="@color/primary_text" />
-    </android.support.design.widget.TextInputLayout>
-
-    <android.support.design.widget.TextInputLayout
-        android:id="@+id/inputDestinationLayout"
-        android:layout_width="130dp"
+    <EditText
+        android:id="@+id/inputOrigin"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_alignTop="@+id/inputOriginLayout"
-        android:layout_marginLeft="31dp">
+        android:layout_below="@id/imageOmni"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="20dp"
+        android:hint="¿Dónde estás?"
+        android:inputType="textCapWords"
+        android:textColor="@color/icons"
+        android:textColorHint="@color/fancy_blue2"
+        android:textSize="18sp" />
 
-        <EditText
-            android:id="@+id/inputOrigin"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:hint="@string/inputOrigin_hint"
-            android:inputType="textCapWords" />
-    </android.support.design.widget.TextInputLayout>
+    <EditText
+        android:id="@+id/inputDestination"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/inputOrigin"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginTop="6dp"
+        android:hint="¿A dónde vas?"
+        android:inputType="textCapWords"
+        android:textColor="@color/icons"
+        android:textColorHint="@color/fancy_blue2"
+        android:textSize="18sp" />
 
     <Button
         android:id="@+id/buttonGetRoute"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/inputDestinationLayout"
+        android:layout_below="@id/inputDestination"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="43dp"
-        android:background="@color/accent"
-        android:text="@string/search" />
+        android:layout_marginTop="25dp"
+        android:background="@drawable/border_button"
+        android:paddingLeft="50dp"
+        android:paddingRight="50dp"
+        android:text="@string/search"
+        android:textColor="@color/fancy_blue"
+        android:textSize="14sp" />
+
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:src="@drawable/homemap"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

@@ -45,6 +45,5 @@ public class HomeScreenActivity extends AppCompatActivity {
         intent.putExtra(OmniServer.ORIGIN_QUERY, origin)
                 .putExtra(OmniServer.DESTINATION_QUERY, destination);
         startActivity(intent);
-        finish();
     }
 }

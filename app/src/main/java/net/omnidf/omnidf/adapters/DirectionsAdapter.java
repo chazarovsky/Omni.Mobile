@@ -49,21 +49,6 @@ public class DirectionsAdapter extends RecyclerView.Adapter<DirectionsAdapter.Vi
 
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int i) {
-        if (i == 0) {
-            viewHolder.imageDirectionType.setImageResource(R.drawable.ic_walkround);
-            viewHolder.textDirections
-                    .setText("Dirígete desde tu origen hasta el metro: " +
-                            directions.get(i).getProperties().optString("node-name"));
-        } else if (i == adapterSize - 1) {
-            viewHolder.imageDirectionType.setImageResource(R.drawable.ic_walkround);
-            viewHolder.textDirections.setText("Camina del metro " +
-                    directions.get(i - 1).getProperties().optString("node-name") + " hacia tu destino");
-        } else {
-            viewHolder.imageDirectionType.setImageResource(R.drawable.ic_metroround);
-            viewHolder.textDirections
-                    .setText(directions.get(i - 1).getProperties().optString("node-name") + " > "
-                            + directions.get(i).getProperties().optString("node-name"));
-        }
     }
 
     @Override

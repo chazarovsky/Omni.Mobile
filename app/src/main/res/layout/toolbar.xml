@@ -5,8 +5,8 @@
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
-        android:fitsSystemWindows="true">
+        android:fitsSystemWindows="true"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <android.support.v7.widget.Toolbar
             android:id="@+id/toolbar"
@@ -18,43 +18,75 @@
             app:layout_scrollFlags="scroll|enterAlways">
 
             <LinearLayout
+                android:layout_marginTop="8dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginBottom="16dp"
-                android:layout_marginLeft="72dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"
                 android:orientation="vertical">
 
-                <android.support.design.widget.TextInputLayout
+                <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal">
+                    <ImageView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_toggle"/>
 
-                    <EditText
-                        android:id="@+id/inputOrigin"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="@string/inputOrigin_hint"
-                        android:inputType="textCapWords"
-                        android:maxLines="1"
-                        android:textColor="@color/icons" />
-                </android.support.design.widget.TextInputLayout>
+                    <TextView
+                        android:gravity="center"
+                        android:id="@+id/titleToolbar"
+                        android:textAlignment="center"
+                        android:layout_width="260dp"
+                        android:textSize="18dp"
+                        android:layout_height="match_parent" />
 
-                <android.support.design.widget.TextInputLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent">
+                    <ImageView
+                        android:id="@+id/imagePencil"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="true"
+                        android:src="@drawable/ic_action_lapiz"/>
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="327dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:layout_height="match_parent"
+                    android:orientation="horizontal"
+                    android:weightSum="5">
+                    <ImageView
+                        android:id="@+id/imageMetro"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_metro"
+                        android:layout_weight="1"/>
+                    <ImageView
+                        android:id="@+id/imageBus"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_bus"/>
+                    <ImageView
+                        android:id="@+id/imageWalk"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_walk"/>
+                    <ImageView
+                        android:id="@+id/imageTaxi"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_taxi"/>
+                    <ImageView
+                        android:id="@+id/imageBike"
+                        android:layout_weight="1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:src="@drawable/ic_bike"/>
+                </LinearLayout>
 
-                    <EditText
-                        android:id="@+id/inputDestination"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:hint="@string/inputDestination_hint"
-                        android:inputType="textCapWords"
-                        android:maxLines="1"
-                        android:textColor="@color/icons" />
-                </android.support.design.widget.TextInputLayout>
             </LinearLayout>
-
 
         </android.support.v7.widget.Toolbar>
     </android.support.design.widget.AppBarLayout>
